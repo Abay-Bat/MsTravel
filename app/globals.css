@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------------------------
+   Дизайн-система
+   ------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    /* Акцент */
+    --brand: 255 107 53; /* #FF6B35 */
+    --brand-strong: 255 90 32; /* #FF5A20 */
+    --brand-dark: 217 74 24; /* #D94A18 */
+    --brand-soft: 255 240 234; /* #FFF0EA */
+
+    /* Поверхности */
+    --surface: 255 255 255; /* #FFFFFF */
+    --surface-muted: 249 250 251; /* #F9FAFB */
+    --surface-dark: 17 24 39; /* #111827 */
+
+    /* Текст */
+    --ink: 17 24 39; /* #111827 */
+    --ink-muted: 107 114 128; /* #6B7280 */
+    --ink-subtle: 156 163 175; /* #9CA3AF */
+    --ink-inverse: 255 255 255;
+
+    /* Границы */
+    --line: 229 231 235; /* #E5E7EB */
+    --line-strong: 209 213 219; /* #D1D5DB */
+
+    /* Вспомогательные тона для карточек-фич */
+    --accent-blue: 235 244 255;
+    --accent-green: 233 250 240;
+
+    --radius-card: 1.5rem; /* rounded-3xl */
+    --header-height: 76px;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+  }
+
+  body {
+    @apply bg-surface text-ink antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    @apply bg-brand text-white;
+  }
+
+  /* Видимый фокус для клавиатуры */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer components {
+  /* Ширина контента, одинаковая для всех секций */
+  .container-page {
+    @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-full
+           text-sm font-semibold transition-all duration-200
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-md {
+    @apply h-11 px-6;
+  }
+
+  .btn-lg {
+    @apply h-14 px-8 text-base;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-brand hover:bg-brand-strong
+           active:translate-y-px;
+  }
+
+  .btn-outline {
+    @apply btn border border-line-strong bg-white text-ink
+           hover:border-ink hover:bg-surface-muted active:translate-y-px;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink-muted hover:bg-surface-muted hover:text-ink;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white ring-1 ring-line transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-float hover:ring-transparent;
+  }
+
+  .field {
+    @apply h-12 w-full rounded-2xl border border-line bg-white px-4 text-sm
+           text-ink placeholder:text-ink-subtle
+           focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-brand;
+  }
+}
+
+/* Уважаем системную настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
